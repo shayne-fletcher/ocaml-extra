@@ -1,0 +1,7 @@
+_SUPPORTED = not host_info().os.is_windows
+
+ocaml_library(
+  name = "extra",
+  srcs = glob(["*.ml*"]),
+  visibility = ["PUBLIC"],
+) if _SUPPORTED else None
