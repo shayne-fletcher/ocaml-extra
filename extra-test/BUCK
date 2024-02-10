@@ -2,8 +2,8 @@ ocaml_binary(
     name = "extra-test",
     srcs = ["test.ml"],
     deps = [
-        "root//extra:extra",
-        "root//third-party/ocaml:ounit2",
-        "root//third-party/ocaml:unix",
+        "extra//extra-lib:extra",
+        "extra//third-party/ocaml:ounit2",
+        "extra//third-party/ocaml:unix",
     ],
 )

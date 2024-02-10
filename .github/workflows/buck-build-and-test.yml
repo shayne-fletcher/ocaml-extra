@@ -25,5 +25,5 @@ jobs:
           opam install menhir ppxlib ounit -y
           opam env | sed -e "s/ export .*//g" -e "s/'//g" -e "s/\;//g" >> $GITHUB_ENV
       - run: ./ocaml-setup.sh
-      - run: buck2 build root//... -v 2
-      - run: buck2 run root//extra-test:extra-test -v 2
+      - run: buck2 build extra//... -v 2
+      - run: buck2 run extra//extra-test:extra-test -v 2
