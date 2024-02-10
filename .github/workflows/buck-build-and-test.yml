@@ -21,8 +21,8 @@ jobs:
       - run: brew install opam
         if: matrix.os == 'macos'
       - run: |
-          opam init --compiler=5.1.1 --disable-sandboxing -y
-          opam install menhir ppxlib ounit -y
+          opam init --color=always --compiler=5.1.1 --disable-sandboxing -y
+          opam install --color=always menhir ppxlib ounit -y
           opam env | sed -e "s/ export .*//g" -e "s/'//g" -e "s/\;//g" >> $GITHUB_ENV
       - run: ./ocaml-setup.sh
       - run: buck2 build extra//... -v 2
