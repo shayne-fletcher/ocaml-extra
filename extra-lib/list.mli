@@ -8,3 +8,5 @@ val second : ('c -> 'd) -> 'a * 'c -> 'a * 'd
 val strip_prefix : 'a list -> 'a list -> 'a list option
 val strip_suffix : 'a list -> 'a list -> 'a list option
 val strip_infix : 'a list -> 'a list -> ('a list * 'a list) option
+
+val replace : 'a list -> 'a list -> 'a list -> 'a list

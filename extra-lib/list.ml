@@ -39,19 +39,15 @@ let rec strip_infix (needle : 'a list) (haystack : 'a list) :
       | Some rest -> Some ([], rest)
       | None -> Option.map (first (fun cs -> x :: cs)) (strip_infix needle xs))
 
-(*
--- | Replace a subsequence everywhere it occurs.
---
--- > replace "el" "_" "Hello Bella" == "H_lo B_la"
--- > replace "el" "e" "Hello"       == "Helo"
--- > replace "" "x" "Hello"         == "xHxexlxlxox"
--- > replace "" "x" ""              == "x"
--- > \xs ys -> replace xs xs ys == ys
-replace :: Eq a => [a] -> [a] -> [a] -> [a]
-replace [] to xs = go xs
-    where go [] = to
-          go (x:xs) = to ++ x : go xs
-replace from to xs | Just xs <- stripPrefix from xs = to ++ replace from to xs
-replace from to (x:xs) = x : replace from to xs
-replace from to [] = []
-*)
+(* [replace] a subsequence wherever it occurs.  *)
+let rec replace (from: 'a list) (to_: 'a list) (xs : 'a list) : 'a list =
+  let rec go =  function
+    | [] -> to_
+    | x :: xs -> to_ @ x :: go xs in
+  match (from, to_, xs) with
+  | ([], to_, xs) -> go xs
+  | (from, to_, []) -> []
+  | (from, to_, x :: xs) ->
+     match strip_prefix from (x :: xs) with
+         | Some xs -> to_ @ replace from to_ xs
+         | None -> x :: replace from to_ xs
