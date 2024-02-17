@@ -27,3 +27,4 @@ jobs:
       - run: ./ocaml-setup.sh
       - run: buck2 build extra//... -v 2
       - run: buck2 run extra//extra-test:extra-test -v 2 -- -ci true
+      - run: buck2 run extra//sort-test:sort-test -v 2 -- -ci true
