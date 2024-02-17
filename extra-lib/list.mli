@@ -10,3 +10,7 @@ val strip_suffix : 'a list -> 'a list -> 'a list option
 val strip_infix : 'a list -> 'a list -> ('a list * 'a list) option
 
 val replace : 'a list -> 'a list -> 'a list -> 'a list
+
+val repeatedly : ('a list -> ('b * 'a list)) -> 'a list -> 'b list
+
+val drop_while : ('a -> bool) -> 'a list -> 'a list

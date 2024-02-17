@@ -51,3 +51,30 @@ let rec replace (from: 'a list) (to_: 'a list) (xs : 'a list) : 'a list =
      match strip_prefix from (x :: xs) with
          | Some xs -> to_ @ replace from to_ xs
          | None -> x :: replace from to_ xs
+
+(*
+Apply some operation repeatedly, producing an element of output
+--   and the remainder of the list.--   and the remainder of the list.
+--
+-- When the empty list is reached it is returned, so the operation
+-- is /never/ applied to the empty input.
+-- That fact is encoded in the type system with 'repeatedlyNE'
+--
+-- > \xs -> repeatedly (splitAt 3) xs  == chunksOf 3 xs
+-- > \xs -> repeatedly word1 (trim xs) == words xs
+-- > \xs -> repeatedly line1 xs == lines xs
+repeatedly :: ([a] -> (b, [a])) -> [a] -> [b]
+repeatedly f [] = []
+repeatedly f as = b : repeatedly f as'
+    where (b, as') = f as
+ *)
+
+let rec repeatedly (f : 'a list -> ('b * 'a list)) (es: 'a list) : 'b list =
+  match es with
+  | [] -> []
+  | _ -> let (b, es) = f es in b :: repeatedly f es
+
+let rec drop_while (f : 'a -> bool) : 'a list -> 'a list =
+  function
+  | [] -> []
+  | (x :: xs') as xs -> if f x then xs' else xs
