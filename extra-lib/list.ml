@@ -74,7 +74,23 @@ let rec repeatedly (f : 'a list -> ('b * 'a list)) (es: 'a list) : 'b list =
   | [] -> []
   | _ -> let (b, es) = f es in b :: repeatedly f es
 
+let take_while (f: 'a -> bool) (xs: 'a list) : 'a list =
+  let rec take_while_rec acc f xs =
+    match xs with
+    | [] -> Stdlib.List.rev acc
+    | x :: xs' ->
+       if not (f x) then
+         Stdlib.List.rev acc
+       else
+         take_while_rec (x :: acc) f xs' in
+  take_while_rec [] f xs
+
 let rec drop_while (f : 'a -> bool) : 'a list -> 'a list =
   function
   | [] -> []
-  | (x :: xs') as xs -> if f x then xs' else xs
+  | (x :: xs') as xs -> if f x then drop_while f xs' else xs
+
+let break p xs = (
+    take_while (fun x -> not (p x)) xs,
+    drop_while (fun x -> not (p x)) xs
+  )

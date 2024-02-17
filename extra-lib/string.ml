@@ -20,13 +20,16 @@ let replace_s from to_ xs =
   implode (List.replace (explode from) (explode to_) (explode xs))
 
 let repeatedly_s f es =
-  let f' (xs: char list) : ('b * char list) =
-    let (b, xs') : ('b * string) = f (implode xs) in
-    (b, explode xs') in
-  List.repeatedly f' (explode es)
+  List.repeatedly (fun xs -> List.second explode (f (implode xs))) (explode es)
 
 let isspace = function
   | (' ' | '\t' | '\n' | '\r') -> true
   | _ -> false
 
-let trim_space s = implode (drop_while isspace (explode s))
+let trim_start s = implode (drop_while isspace (explode s))
+
+let word1 str =
+  List.second trim_start (
+      List.bimap implode implode (
+          List.break isspace (explode (trim_start str)))
+    )
