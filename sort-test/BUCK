@@ -1,0 +1,9 @@
+ocaml_binary(
+    name = "sort-test",
+    srcs = ["test.ml"],
+    deps = [
+        "extra//sort-lib:sort",
+        "extra//third-party/ocaml:ounit2",
+        "extra//third-party/ocaml:unix",
+    ],
+)

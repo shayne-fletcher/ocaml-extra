@@ -14,12 +14,16 @@ let test_replace_s_2 _ =
 let test_replace_s_3 _ =
   assert_equal (String.replace_s "" "x" "") ("x")
 
+let test_isspace_0 _ =
+  assert(String.isspace ' ')
+
 let tests = "test suite for extra" >::: [
       "strip_prefix_s_0" >:: test_strip_prefix_s_0;
       "replace_s_0" >:: test_replace_s_0;
       "replace_s_1" >:: test_replace_s_1;
       "replace_s_2" >:: test_replace_s_2;
       "replace_s_3" >:: test_replace_s_3;
+      "is_space_0" >:: test_isspace_0;
 ]
 
 let _ = run_test_tt_main tests
