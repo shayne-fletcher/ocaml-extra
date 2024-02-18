@@ -15,7 +15,7 @@ let test_replace_s_3 _ =
   assert_equal (String.replace_s "" "x" "") ("x")
 
 let test_isspace_0 _ =
-  assert(String.isspace ' ')
+  Stdlib.List.iter (fun c -> assert (String.isspace c)) [' '; '\n'; '\t';'\r']
 
 let test_take_while_0 _ =
   assert_equal [1; 2] (List.take_while (fun i -> i < 3) [1; 2; 3; 4])
