@@ -26,6 +26,11 @@ let test_take_while_0 _ =
 let test_break_0 _ =
   assert_equal ([1; 2], [3; 4]) (List.break (fun i -> i >= 3) [1; 2; 3; 4])
 
+let test_take_while_end_0 _ =
+  assert_equal ([4; 6; 8]) (List.take_while_end (fun n -> n mod 2 == 0) [1; 2; 3; 4; 6; 8])
+let test_drop_while_end_0 _ =
+  assert_equal ([1; 2; 3]) (List.drop_while_end (fun n -> n mod 2 == 0) [1; 2; 3; 4; 6; 8])
+
 let tests = "test suite for extra" >::: [
       "strip_prefix_s_0" >:: test_strip_prefix_s_0;
       "replace_s_0" >:: test_replace_s_0;
@@ -36,6 +41,8 @@ let tests = "test suite for extra" >::: [
       "drop_while_0" >:: test_drop_while_0;
       "take_while_0" >:: test_take_while_0;
       "break_0" >:: test_break_0;
+      "take_while_end_0" >:: test_take_while_end_0;
+      "drop_while_end_0" >:: test_drop_while_end_0;
 ]
 
 let _ = run_test_tt_main tests

@@ -85,10 +85,18 @@ let take_while (f: 'a -> bool) (xs: 'a list) : 'a list =
          take_while_rec (x :: acc) f xs' in
   take_while_rec [] f xs
 
-let rec drop_while (f : 'a -> bool) : 'a list -> 'a list =
-  function
+let take_while_end f xs =
+  Stdlib.List.rev (take_while f (Stdlib.List.rev xs))
+
+let rec drop_while p = function
   | [] -> []
-  | (x :: xs') as xs -> if f x then drop_while f xs' else xs
+  | (x :: xs') as xs -> if p x then drop_while p xs' else xs
+
+let drop_while_end (p : 'a -> bool) (xs : 'a list) : 'a list =
+  let f x acc = match acc with
+    | [] when p x -> []
+    | _ -> x :: acc
+  in Stdlib.List.fold_right f xs []
 
 let break p xs = (
     take_while (fun x -> not (p x)) xs,
