@@ -1,0 +1,30 @@
+_SUPPORTED = not host_info().os.is_windows
+
+ocaml_binary(
+    name = "ppx",
+    srcs = [
+        "ppx_driver.ml"
+    ],
+    compiler_flags = [
+        "-linkall",
+    ],
+    deps = [
+        "extra//third-party/ocaml:ppx_sexp_conv",
+        "extra//third-party/ocaml:ppx_hash",
+        "extra//third-party/ocaml:ppx_compare",
+    ],
+) if _SUPPORTED else None
+
+ocaml_binary(
+    name = "hello-core",
+    srcs = [
+        "hello_core.ml"
+    ],
+    compiler_flags = [
+        "-ppx",
+        "$(exe_target :ppx) --as-ppx",
+    ],
+    deps = [
+        "extra//third-party/ocaml:core",
+    ],
+)  if _SUPPORTED else None

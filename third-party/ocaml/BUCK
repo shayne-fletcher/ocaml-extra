@@ -74,6 +74,15 @@ export_file(
 
 # buildifier: disable=no-effect
 sh_binary(
+    name = "ppx-jane-exe",
+    main = "opam/bin/ppx-jane",
+    visibility = [
+        "PUBLIC",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+sh_binary(
     name = "menhir-exe",
     main = "opam/bin/menhir",
     visibility = [
@@ -85,6 +94,15 @@ sh_binary(
 sh_binary(
     name = "ocamlprof-exe",
     main = "opam/bin/ocamlprof",
+    visibility = [
+        "PUBLIC",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+sh_binary(
+    name = "ppx-base-exe",
+    main = "opam/bin/ppx-base",
     visibility = [
         "PUBLIC",
     ],
@@ -269,6 +287,468 @@ sh_binary(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "base",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base",
+    lib_dir = "",
+    include_dir = "opam/lib/base",
+    native_lib = "opam/lib/base/base.cmxa",
+    bytecode_lib = "opam/lib/base/base.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/base/libbase_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/base/libbase_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base.caml",
+        ":base.base_internalhash_types",
+        ":sexplib0",
+        ":base.shadow_stdlib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base.base-plugin",
+    src = "opam/lib/base/base.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base.runtime.js",
+    src = "opam/lib/base/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base.base_internalhash_types",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base.base_internalhash_types",
+    lib_dir = "",
+    include_dir = "opam/lib/base/base_internalhash_types",
+    native_lib = "opam/lib/base/base_internalhash_types/base_internalhash_types.cmxa",
+    bytecode_lib = "opam/lib/base/base_internalhash_types/base_internalhash_types.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/base/base_internalhash_types/libbase_internalhash_types_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/base/base_internalhash_types/libbase_internalhash_types_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base.base_internalhash_types.base_internalhash_types-plugin",
+    src = "opam/lib/base/base_internalhash_types/base_internalhash_types.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base.base_internalhash_types.runtime.js",
+    src = "opam/lib/base/base_internalhash_types/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base.caml",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base.caml",
+    lib_dir = "",
+    include_dir = "opam/lib/base/caml",
+    native_lib = "opam/lib/base/caml/caml.cmxa",
+    bytecode_lib = "opam/lib/base/caml/caml.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base.caml.caml-plugin",
+    src = "opam/lib/base/caml/caml.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base.md5",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base.md5",
+    lib_dir = "",
+    include_dir = "opam/lib/base/md5",
+    native_lib = "opam/lib/base/md5/md5_lib.cmxa",
+    bytecode_lib = "opam/lib/base/md5/md5_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base.md5.md5_lib-plugin",
+    src = "opam/lib/base/md5/md5_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base.shadow_stdlib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base.shadow_stdlib",
+    lib_dir = "",
+    include_dir = "opam/lib/base/shadow_stdlib",
+    native_lib = "opam/lib/base/shadow_stdlib/shadow_stdlib.cmxa",
+    bytecode_lib = "opam/lib/base/shadow_stdlib/shadow_stdlib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base.shadow_stdlib.shadow_stdlib-plugin",
+    src = "opam/lib/base/shadow_stdlib/shadow_stdlib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base_bigstring",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base_bigstring",
+    lib_dir = "",
+    include_dir = "opam/lib/base_bigstring",
+    native_lib = "opam/lib/base_bigstring/base_bigstring.cmxa",
+    bytecode_lib = "opam/lib/base_bigstring/base_bigstring.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/base_bigstring/libbase_bigstring_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/base_bigstring/libbase_bigstring_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":ppx_stable_witness.runtime",
+        ":int_repr",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base_bigstring.base_bigstring-plugin",
+    src = "opam/lib/base_bigstring/base_bigstring.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base_bigstring.runtime.js",
+    src = "opam/lib/base_bigstring/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base_quickcheck",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base_quickcheck",
+    lib_dir = "",
+    include_dir = "opam/lib/base_quickcheck",
+    native_lib = "opam/lib/base_quickcheck/base_quickcheck.cmxa",
+    bytecode_lib = "opam/lib/base_quickcheck/base_quickcheck.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":base",
+        ":ppx_hash.runtime-lib",
+        ":sexplib0",
+        ":splittable_random",
+        ":ppx_compare.runtime-lib",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_here.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base_quickcheck.base_quickcheck-plugin",
+    src = "opam/lib/base_quickcheck/base_quickcheck.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base_quickcheck.ppx_quickcheck",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base_quickcheck.ppx_quickcheck",
+    lib_dir = "",
+    include_dir = "opam/lib/base_quickcheck/ppx_quickcheck",
+    native_lib = "opam/lib/base_quickcheck/ppx_quickcheck/ppx_quickcheck.cmxa",
+    bytecode_lib = "opam/lib/base_quickcheck/ppx_quickcheck/ppx_quickcheck.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base_quickcheck.ppx_quickcheck.expander",
+        ":ppxlib.ast",
+        ":ppxlib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base_quickcheck.ppx_quickcheck-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base_quickcheck.ppx_quickcheck-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/base_quickcheck/ppx_quickcheck",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base_quickcheck",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base_quickcheck.ppx_quickcheck.ppx_quickcheck-plugin",
+    src = "opam/lib/base_quickcheck/ppx_quickcheck/ppx_quickcheck.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base_quickcheck.ppx_quickcheck.expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base_quickcheck.ppx_quickcheck.expander",
+    lib_dir = "",
+    include_dir = "opam/lib/base_quickcheck/ppx_quickcheck/expander",
+    native_lib = "opam/lib/base_quickcheck/ppx_quickcheck/expander/ppx_quickcheck_expander.cmxa",
+    bytecode_lib = "opam/lib/base_quickcheck/ppx_quickcheck/expander/ppx_quickcheck_expander.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":compiler-libs.common",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base_quickcheck.ppx_quickcheck.expander.ppx_quickcheck_expander-plugin",
+    src = "opam/lib/base_quickcheck/ppx_quickcheck/expander/ppx_quickcheck_expander.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "base_quickcheck.ppx_quickcheck.runtime",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "base_quickcheck.ppx_quickcheck.runtime",
+    lib_dir = "",
+    include_dir = "opam/lib/base_quickcheck/ppx_quickcheck/runtime",
+    native_lib = "opam/lib/base_quickcheck/ppx_quickcheck/runtime/ppx_quickcheck_runtime.cmxa",
+    bytecode_lib = "opam/lib/base_quickcheck/ppx_quickcheck/runtime/ppx_quickcheck_runtime.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":base_quickcheck",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "base_quickcheck.ppx_quickcheck.runtime.ppx_quickcheck_runtime-plugin",
+    src = "opam/lib/base_quickcheck/ppx_quickcheck/runtime/ppx_quickcheck_runtime.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "bin_prot",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "bin_prot",
+    lib_dir = "",
+    include_dir = "opam/lib/bin_prot",
+    native_lib = "opam/lib/bin_prot/bin_prot.cmxa",
+    bytecode_lib = "opam/lib/bin_prot/bin_prot.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/bin_prot/libbin_prot_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/bin_prot/libbin_prot_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":sexplib0",
+        ":base.md5",
+        ":ppx_compare.runtime-lib",
+        ":ppx_stable_witness.stable_witness",
+        ":ppx_sexp_conv.runtime-lib",
+        ":bin_prot.shape",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "bin_prot.bin_prot-plugin",
+    src = "opam/lib/bin_prot/bin_prot.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "bin_prot.runtime.js",
+    src = "opam/lib/bin_prot/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "bin_prot.shape",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "bin_prot.shape",
+    lib_dir = "",
+    include_dir = "opam/lib/bin_prot/shape",
+    native_lib = "opam/lib/bin_prot/shape/bin_shape.cmxa",
+    bytecode_lib = "opam/lib/bin_prot/shape/bin_shape.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":variantslib",
+        ":sexplib0",
+        ":base.md5",
+        ":ppx_compare.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "bin_prot.shape.bin_shape-plugin",
+    src = "opam/lib/bin_prot/shape/bin_shape.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "bin_prot.xen",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "bin_prot.xen",
+    lib_dir = "",
+    include_dir = "opam/lib/bin_prot/xen",
+    native_lib = "opam/lib/bin_prot/xen/bin_prot_xen.cmxa",
+    bytecode_lib = "opam/lib/bin_prot/xen/bin_prot_xen.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "bin_prot.xen.bin_prot_xen-plugin",
+    src = "opam/lib/bin_prot/xen/bin_prot_xen.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "bytes",
     visibility = [
         "PUBLIC",
@@ -366,8 +846,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":compiler-libs.optcomp",
         ":dynlink",
+        ":compiler-libs.optcomp",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -416,6 +896,423 @@ prebuilt_ocaml_library(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "core",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core",
+    lib_dir = "",
+    include_dir = "opam/lib/core",
+    native_lib = "opam/lib/core/core.cmxa",
+    bytecode_lib = "opam/lib/core/core.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/core/libcore_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/core/libcore_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":core.command",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":core.univ_map",
+        ":base.md5",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":jane-street-headers",
+        ":splittable_random",
+        ":time_now",
+        ":core.filename_base",
+        ":sexplib",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":stdio",
+        ":ppx_stable_witness.runtime",
+        ":core.heap_block",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_bigstring",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":core.base_for_tests",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+        ":core.validate",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.core-plugin",
+    src = "opam/lib/core/core.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.strftime.js",
+    src = "opam/lib/core/strftime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.runtime.js",
+    src = "opam/lib/core/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "core.base_for_tests",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core.base_for_tests",
+    lib_dir = "",
+    include_dir = "opam/lib/core/base_for_tests",
+    native_lib = "opam/lib/core/base_for_tests/base_for_tests.cmxa",
+    bytecode_lib = "opam/lib/core/base_for_tests/base_for_tests.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppx_hash.runtime-lib",
+        ":ppx_inline_test.config",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_here.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.base_for_tests.base_for_tests-plugin",
+    src = "opam/lib/core/base_for_tests/base_for_tests.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "core.command",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core.command",
+    lib_dir = "",
+    include_dir = "opam/lib/core/command",
+    native_lib = "opam/lib/core/command/command.cmxa",
+    bytecode_lib = "opam/lib/core/command/command.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":core.univ_map",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":core.filename_base",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":stdio",
+        ":ppx_stable_witness.runtime",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.command.command-plugin",
+    src = "opam/lib/core/command/command.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "core.filename_base",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core.filename_base",
+    lib_dir = "",
+    include_dir = "opam/lib/core/filename_base",
+    native_lib = "opam/lib/core/filename_base/filename_base.cmxa",
+    bytecode_lib = "opam/lib/core/filename_base/filename_base.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":ppx_stable_witness.runtime",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.filename_base.filename_base-plugin",
+    src = "opam/lib/core/filename_base/filename_base.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "core.heap_block",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core.heap_block",
+    lib_dir = "",
+    include_dir = "opam/lib/core/heap_block",
+    native_lib = "opam/lib/core/heap_block/heap_block.cmxa",
+    bytecode_lib = "opam/lib/core/heap_block/heap_block.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/core/heap_block/libheap_block_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/core/heap_block/libheap_block_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":ppx_stable_witness.runtime",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.heap_block.heap_block-plugin",
+    src = "opam/lib/core/heap_block/heap_block.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.heap_block.runtime.js",
+    src = "opam/lib/core/heap_block/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "core.top",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core.top",
+    lib_dir = "",
+    include_dir = "opam/lib/core/top",
+    bytecode_lib = "opam/lib/core/top/core_top.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":core",
+        ":compiler-libs.toplevel",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "core.univ_map",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core.univ_map",
+    lib_dir = "",
+    include_dir = "opam/lib/core/univ_map",
+    native_lib = "opam/lib/core/univ_map/univ_map.cmxa",
+    bytecode_lib = "opam/lib/core/univ_map/univ_map.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":ppx_stable_witness.runtime",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.univ_map.univ_map-plugin",
+    src = "opam/lib/core/univ_map/univ_map.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "core.validate",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "core.validate",
+    lib_dir = "",
+    include_dir = "opam/lib/core/validate",
+    native_lib = "opam/lib/core/validate/validate.cmxa",
+    bytecode_lib = "opam/lib/core/validate/validate.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":ppx_stable_witness.runtime",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "core.validate.validate-plugin",
+    src = "opam/lib/core/validate/validate.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "csexp",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "csexp",
+    lib_dir = "",
+    include_dir = "opam/lib/csexp",
+    native_lib = "opam/lib/csexp/csexp.cmxa",
+    bytecode_lib = "opam/lib/csexp/csexp.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "csexp.csexp-plugin",
+    src = "opam/lib/csexp/csexp.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "dune",
     visibility = [
         "PUBLIC",
@@ -431,6 +1328,35 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
     ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "dune-configurator",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "dune-configurator",
+    lib_dir = "",
+    include_dir = "opam/lib/dune-configurator",
+    native_lib = "opam/lib/dune-configurator/configurator.cmxa",
+    bytecode_lib = "opam/lib/dune-configurator/configurator.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":csexp",
+        ":unix",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "dune-configurator.configurator-plugin",
+    src = "opam/lib/dune-configurator/configurator.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -452,6 +1378,34 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
     ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "fieldslib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "fieldslib",
+    lib_dir = "",
+    include_dir = "opam/lib/fieldslib",
+    native_lib = "opam/lib/fieldslib/fieldslib.cmxa",
+    bytecode_lib = "opam/lib/fieldslib/fieldslib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "fieldslib.fieldslib-plugin",
+    src = "opam/lib/fieldslib/fieldslib.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -554,6 +1508,109 @@ prebuilt_ocaml_library(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "int_repr",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "int_repr",
+    lib_dir = "",
+    include_dir = "opam/lib/int_repr",
+    native_lib = "opam/lib/int_repr/int_repr.cmxa",
+    bytecode_lib = "opam/lib/int_repr/int_repr.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+        ":ppx_bench.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":variantslib",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":typerep",
+        ":ppx_expect.collector",
+        ":ppx_stable_witness.runtime",
+        ":ppx_module_timer.runtime",
+        ":ppx_enumerate.runtime-lib",
+        ":bin_prot",
+        ":ppx_assert.runtime-lib",
+        ":base_quickcheck",
+        ":base",
+        ":ppx_inline_test.config",
+        ":ppx_expect.config",
+        ":ppx_here.runtime-lib",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "int_repr.int_repr-plugin",
+    src = "opam/lib/int_repr/int_repr.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "jane-street-headers",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "jane-street-headers",
+    lib_dir = "",
+    include_dir = "opam/lib/jane-street-headers",
+    native_lib = "opam/lib/jane-street-headers/jane_street_headers.cmxa",
+    bytecode_lib = "opam/lib/jane-street-headers/jane_street_headers.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "jane-street-headers.jane_street_headers-plugin",
+    src = "opam/lib/jane-street-headers/jane_street_headers.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "jst-config",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "jst-config",
+    lib_dir = "",
+    include_dir = "opam/lib/jst-config",
+    native_lib = "opam/lib/jst-config/config_h.cmxa",
+    bytecode_lib = "opam/lib/jst-config/config_h.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "jst-config.config_h-plugin",
+    src = "opam/lib/jst-config/config_h.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "menhir",
     visibility = [
         "PUBLIC",
@@ -569,6 +1626,33 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
     ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "menhirCST",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "menhirCST",
+    lib_dir = "",
+    include_dir = "opam/lib/menhirCST",
+    native_lib = "opam/lib/menhirCST/menhirCST.cmxa",
+    bytecode_lib = "opam/lib/menhirCST/menhirCST.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "menhirCST.menhirCST-plugin",
+    src = "opam/lib/menhirCST/menhirCST.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -623,6 +1707,75 @@ prebuilt_ocaml_library(
 export_file(
     name = "menhirSdk.menhirSdk-plugin",
     src = "opam/lib/menhirSdk/menhirSdk.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "num",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "num",
+    lib_dir = "",
+    include_dir = "opam/lib/num",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":num.core",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "num-top",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "num-top",
+    lib_dir = "",
+    include_dir = "opam/lib/num-top",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":num.core",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "num.core",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "num.core",
+    lib_dir = "",
+    include_dir = "opam/lib/num",
+    native_lib = "opam/lib/num/nums.cmxa",
+    bytecode_lib = "opam/lib/num/nums.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/num/libnums.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/num/libnums.a",
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "num.core.nums-plugin",
+    src = "opam/lib/num/nums.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -822,8 +1975,8 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
         ":ounit2.advanced",
-        ":seq",
         ":unix",
+        ":seq",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -852,8 +2005,8 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
         ":stdlib-shims",
-        ":seq",
         ":unix",
+        ":seq",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -894,6 +2047,554 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "parsexp",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "parsexp",
+    lib_dir = "",
+    include_dir = "opam/lib/parsexp",
+    native_lib = "opam/lib/parsexp/parsexp.cmxa",
+    bytecode_lib = "opam/lib/parsexp/parsexp.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "parsexp.parsexp-plugin",
+    src = "opam/lib/parsexp/parsexp.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_assert",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_assert",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_assert",
+    native_lib = "opam/lib/ppx_assert/ppx_assert.cmxa",
+    bytecode_lib = "opam/lib/ppx_assert/ppx_assert.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppx_here.expander",
+        ":ppx_sexp_conv.expander",
+        ":ppxlib.ast",
+        ":ppx_compare.expander",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_assert-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_assert-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_assert",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_compare.runtime-lib",
+        ":ppx_here.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+        ":ppx_assert.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_assert.ppx_assert-plugin",
+    src = "opam/lib/ppx_assert/ppx_assert.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_assert.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_assert.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_assert/runtime-lib",
+    native_lib = "opam/lib/ppx_assert/runtime-lib/ppx_assert_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_assert/runtime-lib/ppx_assert_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_assert.runtime-lib.ppx_assert_lib-plugin",
+    src = "opam/lib/ppx_assert/runtime-lib/ppx_assert_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_base",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_base",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_base",
+    native_lib = "opam/lib/ppx_base/ppx_base.cmxa",
+    bytecode_lib = "opam/lib/ppx_base/ppx_base.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppx_enumerate",
+        ":ppx_hash",
+        ":ppx_globalize",
+        ":ppx_compare",
+        ":ppxlib.ast",
+        ":ppx_cold",
+        ":ppx_sexp_conv",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_base-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_base-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_base",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_compare.runtime-lib",
+        ":ppx_compare.runtime-lib",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_base.ppx_base-plugin",
+    src = "opam/lib/ppx_base/ppx_base.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_bench",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_bench",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_bench",
+    native_lib = "opam/lib/ppx_bench/ppx_bench.cmxa",
+    bytecode_lib = "opam/lib/ppx_bench/ppx_bench.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_inline_test.libname",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_bench-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_bench-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_bench",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_bench.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_bench.ppx_bench-plugin",
+    src = "opam/lib/ppx_bench/ppx_bench.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_bench.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_bench.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_bench/runtime-lib",
+    native_lib = "opam/lib/ppx_bench/runtime-lib/ppx_bench_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_bench/runtime-lib/ppx_bench_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_bench.runtime-lib.ppx_bench_lib-plugin",
+    src = "opam/lib/ppx_bench/runtime-lib/ppx_bench_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_bin_prot",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_bin_prot",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_bin_prot",
+    native_lib = "opam/lib/ppx_bin_prot/ppx_bin_prot.cmxa",
+    bytecode_lib = "opam/lib/ppx_bin_prot/ppx_bin_prot.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":base",
+        ":compiler-libs.common",
+        ":ppx_bin_prot.shape-expander",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_bin_prot-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_bin_prot-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_bin_prot",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+        ":bin_prot",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_bin_prot.ppx_bin_prot-plugin",
+    src = "opam/lib/ppx_bin_prot/ppx_bin_prot.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_bin_prot.shape-expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_bin_prot.shape-expander",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_bin_prot/shape-expander",
+    native_lib = "opam/lib/ppx_bin_prot/shape-expander/bin_shape_expand.cmxa",
+    bytecode_lib = "opam/lib/ppx_bin_prot/shape-expander/bin_shape_expand.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppx_here.expander",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_bin_prot.shape-expander.bin_shape_expand-plugin",
+    src = "opam/lib/ppx_bin_prot/shape-expander/bin_shape_expand.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_cold",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_cold",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_cold",
+    native_lib = "opam/lib/ppx_cold/ppx_cold.cmxa",
+    bytecode_lib = "opam/lib/ppx_cold/ppx_cold.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_cold-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_cold-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_cold",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_cold.ppx_cold-plugin",
+    src = "opam/lib/ppx_cold/ppx_cold.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_compare",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_compare",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_compare",
+    native_lib = "opam/lib/ppx_compare/ppx_compare.cmxa",
+    bytecode_lib = "opam/lib/ppx_compare/ppx_compare.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppx_compare.expander",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_compare-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_compare-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_compare",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_compare.runtime-lib",
+        ":ppx_compare.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_compare.ppx_compare-plugin",
+    src = "opam/lib/ppx_compare/ppx_compare.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_compare.expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_compare.expander",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_compare/expander",
+    native_lib = "opam/lib/ppx_compare/expander/ppx_compare_expander.cmxa",
+    bytecode_lib = "opam/lib/ppx_compare/expander/ppx_compare_expander.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_compare.expander.ppx_compare_expander-plugin",
+    src = "opam/lib/ppx_compare/expander/ppx_compare_expander.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_compare.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_compare.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_compare/runtime-lib",
+    native_lib = "opam/lib/ppx_compare/runtime-lib/ppx_compare_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_compare/runtime-lib/ppx_compare_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_compare.runtime-lib.ppx_compare_lib-plugin",
+    src = "opam/lib/ppx_compare/runtime-lib/ppx_compare_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_custom_printf",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_custom_printf",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_custom_printf",
+    native_lib = "opam/lib/ppx_custom_printf/ppx_custom_printf.cmxa",
+    bytecode_lib = "opam/lib/ppx_custom_printf/ppx_custom_printf.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":base",
+        ":compiler-libs.common",
+        ":ppx_sexp_conv.expander",
+        ":ppxlib.metaquot_lifters",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_custom_printf-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_custom_printf-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_custom_printf",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_custom_printf.ppx_custom_printf-plugin",
+    src = "opam/lib/ppx_custom_printf/ppx_custom_printf.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "ppx_derivers",
     visibility = [
         "PUBLIC",
@@ -921,6 +2622,2410 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "ppx_disable_unused_warnings",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_disable_unused_warnings",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_disable_unused_warnings",
+    native_lib = "opam/lib/ppx_disable_unused_warnings/ppx_disable_unused_warnings.cmxa",
+    bytecode_lib = "opam/lib/ppx_disable_unused_warnings/ppx_disable_unused_warnings.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_disable_unused_warnings-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_disable_unused_warnings-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_disable_unused_warnings",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_disable_unused_warnings.ppx_disable_unused_warnings-plugin",
+    src = "opam/lib/ppx_disable_unused_warnings/ppx_disable_unused_warnings.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_enumerate",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_enumerate",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_enumerate",
+    native_lib = "opam/lib/ppx_enumerate/ppx_enumerate.cmxa",
+    bytecode_lib = "opam/lib/ppx_enumerate/ppx_enumerate.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_enumerate-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_enumerate-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_enumerate",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_enumerate.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_enumerate.ppx_enumerate-plugin",
+    src = "opam/lib/ppx_enumerate/ppx_enumerate.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_enumerate.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_enumerate.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_enumerate/runtime-lib",
+    native_lib = "opam/lib/ppx_enumerate/runtime-lib/ppx_enumerate_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_enumerate/runtime-lib/ppx_enumerate_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_enumerate.runtime-lib.ppx_enumerate_lib-plugin",
+    src = "opam/lib/ppx_enumerate/runtime-lib/ppx_enumerate_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect",
+    native_lib = "opam/lib/ppx_expect/ppx_expect.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/ppx_expect.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_expect.payload",
+        ":ppxlib",
+        ":base",
+        ":ppx_here.expander",
+        ":ppx_inline_test",
+        ":ppx_inline_test.libname",
+        ":ppxlib.ast",
+        ":ppx_expect.common",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+        ":ppx_inline_test.config",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_expect.collector",
+        ":ppx_expect.config",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.ppx_expect-plugin",
+    src = "opam/lib/ppx_expect/ppx_expect.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.collector",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.collector",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/collector",
+    native_lib = "opam/lib/ppx_expect/collector/expect_test_collector.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/collector/expect_test_collector.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/ppx_expect/collector/libexpect_test_collector_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/ppx_expect/collector/libexpect_test_collector_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_expect.common",
+        ":ppx_expect.config_types",
+        ":ppx_inline_test.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.collector.expect_test_collector-plugin",
+    src = "opam/lib/ppx_expect/collector/expect_test_collector.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.collector.runtime.js",
+    src = "opam/lib/ppx_expect/collector/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.common",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.common",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/common",
+    native_lib = "opam/lib/ppx_expect/common/expect_test_common.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/common/expect_test_common.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.common.expect_test_common-plugin",
+    src = "opam/lib/ppx_expect/common/expect_test_common.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.config",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.config",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/config",
+    native_lib = "opam/lib/ppx_expect/config/expect_test_config.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/config/expect_test_config.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_expect.config_types",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.config.expect_test_config-plugin",
+    src = "opam/lib/ppx_expect/config/expect_test_config.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.config_types",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.config_types",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/config_types",
+    native_lib = "opam/lib/ppx_expect/config_types/expect_test_config_types.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/config_types/expect_test_config_types.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.config_types.expect_test_config_types-plugin",
+    src = "opam/lib/ppx_expect/config_types/expect_test_config_types.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.evaluator",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.evaluator",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/evaluator",
+    native_lib = "opam/lib/ppx_expect/evaluator/ppx_expect_evaluator.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/evaluator/ppx_expect_evaluator.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_expect.collector",
+        ":stdio",
+        ":ppx_expect.matcher",
+        ":base",
+        ":ppx_expect.make_corrected_file",
+        ":ppx_expect.common",
+        ":ppxlib.print_diff",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.evaluator.ppx_expect_evaluator-plugin",
+    src = "opam/lib/ppx_expect/evaluator/ppx_expect_evaluator.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.make_corrected_file",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.make_corrected_file",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/make_corrected_file",
+    native_lib = "opam/lib/ppx_expect/make_corrected_file/make_corrected_file.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/make_corrected_file/make_corrected_file.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":stdio",
+        ":ppxlib.print_diff",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.make_corrected_file.make_corrected_file-plugin",
+    src = "opam/lib/ppx_expect/make_corrected_file/make_corrected_file.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.matcher",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.matcher",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/matcher",
+    native_lib = "opam/lib/ppx_expect/matcher/expect_test_matcher.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/matcher/expect_test_matcher.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppx_expect.config_types",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_expect.common",
+        ":re",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.matcher.expect_test_matcher-plugin",
+    src = "opam/lib/ppx_expect/matcher/expect_test_matcher.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_expect.payload",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_expect.payload",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_expect/payload",
+    native_lib = "opam/lib/ppx_expect/payload/ppx_expect_payload.cmxa",
+    bytecode_lib = "opam/lib/ppx_expect/payload/ppx_expect_payload.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppx_expect.common",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_expect.payload.ppx_expect_payload-plugin",
+    src = "opam/lib/ppx_expect/payload/ppx_expect_payload.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_fields_conv",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_fields_conv",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_fields_conv",
+    native_lib = "opam/lib/ppx_fields_conv/ppx_fields_conv.cmxa",
+    bytecode_lib = "opam/lib/ppx_fields_conv/ppx_fields_conv.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_fields_conv-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_fields_conv-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_fields_conv",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":fieldslib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_fields_conv.ppx_fields_conv-plugin",
+    src = "opam/lib/ppx_fields_conv/ppx_fields_conv.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_fixed_literal",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_fixed_literal",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_fixed_literal",
+    native_lib = "opam/lib/ppx_fixed_literal/ppx_fixed_literal.cmxa",
+    bytecode_lib = "opam/lib/ppx_fixed_literal/ppx_fixed_literal.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_fixed_literal-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_fixed_literal-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_fixed_literal",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_fixed_literal.ppx_fixed_literal-plugin",
+    src = "opam/lib/ppx_fixed_literal/ppx_fixed_literal.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_globalize",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_globalize",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_globalize",
+    native_lib = "opam/lib/ppx_globalize/ppx_globalize.cmxa",
+    bytecode_lib = "opam/lib/ppx_globalize/ppx_globalize.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_globalize-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_globalize-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_globalize",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_globalize.ppx_globalize-plugin",
+    src = "opam/lib/ppx_globalize/ppx_globalize.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_hash",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_hash",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_hash",
+    native_lib = "opam/lib/ppx_hash/ppx_hash.cmxa",
+    bytecode_lib = "opam/lib/ppx_hash/ppx_hash.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppxlib.ast",
+        ":ppx_hash.expander",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_hash-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_hash-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_hash",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_compare.runtime-lib",
+        ":ppx_hash.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_hash.ppx_hash-plugin",
+    src = "opam/lib/ppx_hash/ppx_hash.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_hash.expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_hash.expander",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_hash/expander",
+    native_lib = "opam/lib/ppx_hash/expander/ppx_hash_expander.cmxa",
+    bytecode_lib = "opam/lib/ppx_hash/expander/ppx_hash_expander.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":base",
+        ":compiler-libs.common",
+        ":ppxlib.ast",
+        ":ppx_compare.expander",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_hash.expander.ppx_hash_expander-plugin",
+    src = "opam/lib/ppx_hash/expander/ppx_hash_expander.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_hash.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_hash.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_hash/runtime-lib",
+    native_lib = "opam/lib/ppx_hash/runtime-lib/ppx_hash_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_hash/runtime-lib/ppx_hash_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppx_compare.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_hash.runtime-lib.ppx_hash_lib-plugin",
+    src = "opam/lib/ppx_hash/runtime-lib/ppx_hash_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_here",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_here",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_here",
+    native_lib = "opam/lib/ppx_here/ppx_here.cmxa",
+    bytecode_lib = "opam/lib/ppx_here/ppx_here.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppx_here.expander",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_here-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_here-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_here",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_here.ppx_here-plugin",
+    src = "opam/lib/ppx_here/ppx_here.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_here.expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_here.expander",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_here/expander",
+    native_lib = "opam/lib/ppx_here/expander/ppx_here_expander.cmxa",
+    bytecode_lib = "opam/lib/ppx_here/expander/ppx_here_expander.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_here.expander.ppx_here_expander-plugin",
+    src = "opam/lib/ppx_here/expander/ppx_here_expander.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_here.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_here.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_here/runtime-lib",
+    native_lib = "opam/lib/ppx_here/runtime-lib/ppx_here_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_here/runtime-lib/ppx_here_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_here.runtime-lib.ppx_here_lib-plugin",
+    src = "opam/lib/ppx_here/runtime-lib/ppx_here_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_ignore_instrumentation",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_ignore_instrumentation",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_ignore_instrumentation",
+    native_lib = "opam/lib/ppx_ignore_instrumentation/ppx_ignore_instrumentation.cmxa",
+    bytecode_lib = "opam/lib/ppx_ignore_instrumentation/ppx_ignore_instrumentation.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_ignore_instrumentation-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_ignore_instrumentation-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_ignore_instrumentation",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_ignore_instrumentation.ppx_ignore_instrumentation-plugin",
+    src = "opam/lib/ppx_ignore_instrumentation/ppx_ignore_instrumentation.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test",
+    native_lib = "opam/lib/ppx_inline_test/ppx_inline_test.cmxa",
+    bytecode_lib = "opam/lib/ppx_inline_test/ppx_inline_test.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppx_inline_test.libname",
+        ":ppxlib.ast",
+        ":ppxlib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_inline_test.config",
+        ":ppx_inline_test.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.ppx_inline_test-plugin",
+    src = "opam/lib/ppx_inline_test/ppx_inline_test.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test.config",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test.config",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test/config",
+    native_lib = "opam/lib/ppx_inline_test/config/inline_test_config.cmxa",
+    bytecode_lib = "opam/lib/ppx_inline_test/config/inline_test_config.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.config.inline_test_config-plugin",
+    src = "opam/lib/ppx_inline_test/config/inline_test_config.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test.drop",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test.drop",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test/drop",
+    native_lib = "opam/lib/ppx_inline_test/drop/ppx_inline_test_drop.cmxa",
+    bytecode_lib = "opam/lib/ppx_inline_test/drop/ppx_inline_test_drop.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_inline_test",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test.drop-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test.drop-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test/drop",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_inline_test.config",
+        ":ppx_inline_test.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.drop.ppx_inline_test_drop-plugin",
+    src = "opam/lib/ppx_inline_test/drop/ppx_inline_test_drop.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test.libname",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test.libname",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test/libname",
+    native_lib = "opam/lib/ppx_inline_test/libname/ppx_inline_test_libname.cmxa",
+    bytecode_lib = "opam/lib/ppx_inline_test/libname/ppx_inline_test_libname.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.libname.ppx_inline_test_libname-plugin",
+    src = "opam/lib/ppx_inline_test/libname/ppx_inline_test_libname.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test.runner",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test.runner",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test/runner",
+    native_lib = "opam/lib/ppx_inline_test/runner/ppx_inline_test_runner.cmxa",
+    bytecode_lib = "opam/lib/ppx_inline_test/runner/ppx_inline_test_runner.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_inline_test.runner.lib",
+        ":ppx_inline_test.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.runner.ppx_inline_test_runner-plugin",
+    src = "opam/lib/ppx_inline_test/runner/ppx_inline_test_runner.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test.runner.lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test.runner.lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test/runner/lib",
+    native_lib = "opam/lib/ppx_inline_test/runner/lib/ppx_inline_test_runner_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_inline_test/runner/lib/ppx_inline_test_runner_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/ppx_inline_test/runner/lib/libppx_inline_test_runner_lib_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/ppx_inline_test/runner/lib/libppx_inline_test_runner_lib_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.runner.lib.ppx_inline_test_runner_lib-plugin",
+    src = "opam/lib/ppx_inline_test/runner/lib/ppx_inline_test_runner_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.runner.lib.runtime.js",
+    src = "opam/lib/ppx_inline_test/runner/lib/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_inline_test.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_inline_test.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_inline_test/runtime-lib",
+    native_lib = "opam/lib/ppx_inline_test/runtime-lib/ppx_inline_test_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_inline_test/runtime-lib/ppx_inline_test_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":time_now",
+        ":ppx_inline_test.config",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_inline_test.runtime-lib.ppx_inline_test_lib-plugin",
+    src = "opam/lib/ppx_inline_test/runtime-lib/ppx_inline_test_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_jane",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_jane",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_jane",
+    native_lib = "opam/lib/ppx_jane/ppx_jane.cmxa",
+    bytecode_lib = "opam/lib/ppx_jane/ppx_jane.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base_quickcheck.ppx_quickcheck",
+        ":ppx_log",
+        ":ppx_stable",
+        ":ppx_expect",
+        ":ppx_jane.kernel",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_jane-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_jane-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_jane",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base_quickcheck",
+        ":base_quickcheck.ppx_quickcheck.runtime",
+        ":ppx_here.runtime-lib",
+        ":ppx_inline_test.config",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_expect.collector",
+        ":ppx_expect.config",
+        ":ppx_compare.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+        ":ppx_assert.runtime-lib",
+        ":ppx_compare.runtime-lib",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":ppx_bench.runtime-lib",
+        ":bin_prot",
+        ":fieldslib",
+        ":ppx_module_timer.runtime",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_stable_witness.runtime",
+        ":typerep",
+        ":variantslib",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_jane.ppx_jane-plugin",
+    src = "opam/lib/ppx_jane/ppx_jane.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_jane.kernel",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_jane.kernel",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_jane/kernel",
+    native_lib = "opam/lib/ppx_jane/kernel/ppx_jane_kernel.cmxa",
+    bytecode_lib = "opam/lib/ppx_jane/kernel/ppx_jane_kernel.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_stable_witness",
+        ":ppx_assert",
+        ":ppx_custom_printf",
+        ":ppx_tydi",
+        ":ppx_disable_unused_warnings",
+        ":ppx_optional",
+        ":ppx_sexp_value",
+        ":ppx_let",
+        ":ppx_bench",
+        ":ppx_ignore_instrumentation",
+        ":ppx_here",
+        ":ppx_module_timer",
+        ":ppx_typerep_conv",
+        ":ppx_string",
+        ":ppx_fields_conv",
+        ":ppx_sexp_message",
+        ":ppx_fixed_literal",
+        ":ppx_inline_test",
+        ":ppx_base",
+        ":ppx_variants_conv",
+        ":ppx_bin_prot",
+        ":ppx_pipebang",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_jane.kernel-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_jane.kernel-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_jane/kernel",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_compare.runtime-lib",
+        ":ppx_here.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+        ":ppx_assert.runtime-lib",
+        ":ppx_compare.runtime-lib",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_hash.runtime-lib",
+        ":ppx_bench.runtime-lib",
+        ":bin_prot",
+        ":fieldslib",
+        ":ppx_inline_test.config",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_module_timer.runtime",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_stable_witness.runtime",
+        ":typerep",
+        ":variantslib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_jane.kernel.ppx_jane_kernel-plugin",
+    src = "opam/lib/ppx_jane/kernel/ppx_jane_kernel.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_let",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_let",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_let",
+    native_lib = "opam/lib/ppx_let/ppx_let.cmxa",
+    bytecode_lib = "opam/lib/ppx_let/ppx_let.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_let.expander",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_let-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_let-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_let",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_let.ppx_let-plugin",
+    src = "opam/lib/ppx_let/ppx_let.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_let.expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_let.expander",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_let/expander",
+    native_lib = "opam/lib/ppx_let/expander/ppx_let_expander.cmxa",
+    bytecode_lib = "opam/lib/ppx_let/expander/ppx_let_expander.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppx_here.expander",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_let.expander.ppx_let_expander-plugin",
+    src = "opam/lib/ppx_let/expander/ppx_let_expander.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_log",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_log",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_log",
+    native_lib = "opam/lib/ppx_log/ppx_log.cmxa",
+    bytecode_lib = "opam/lib/ppx_log/ppx_log.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_log.kernel",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_log-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_log-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_log",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_log.ppx_log-plugin",
+    src = "opam/lib/ppx_log/ppx_log.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_log.kernel",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_log.kernel",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_log/kernel",
+    native_lib = "opam/lib/ppx_log/kernel/ppx_log_kernel.cmxa",
+    bytecode_lib = "opam/lib/ppx_log/kernel/ppx_log_kernel.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppx_here.expander",
+        ":ppxlib.ast",
+        ":ppx_sexp_message.expander",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_log.kernel-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_log.kernel-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_log/kernel",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_log.types",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_log.kernel.ppx_log_kernel-plugin",
+    src = "opam/lib/ppx_log/kernel/ppx_log_kernel.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_log.types",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_log.types",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_log/types",
+    native_lib = "opam/lib/ppx_log/types/ppx_log_types.cmxa",
+    bytecode_lib = "opam/lib/ppx_log/types/ppx_log_types.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":sexplib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_log.types.ppx_log_types-plugin",
+    src = "opam/lib/ppx_log/types/ppx_log_types.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_module_timer",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_module_timer",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_module_timer",
+    native_lib = "opam/lib/ppx_module_timer/ppx_module_timer.cmxa",
+    bytecode_lib = "opam/lib/ppx_module_timer/ppx_module_timer.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_module_timer-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_module_timer-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_module_timer",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_module_timer.runtime",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_module_timer.ppx_module_timer-plugin",
+    src = "opam/lib/ppx_module_timer/ppx_module_timer.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_module_timer.runtime",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_module_timer.runtime",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_module_timer/runtime",
+    native_lib = "opam/lib/ppx_module_timer/runtime/ppx_module_timer_runtime.cmxa",
+    bytecode_lib = "opam/lib/ppx_module_timer/runtime/ppx_module_timer_runtime.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":stdio",
+        ":base",
+        ":ppx_hash.runtime-lib",
+        ":sexplib0",
+        ":ppx_compare.runtime-lib",
+        ":time_now",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_module_timer.runtime.ppx_module_timer_runtime-plugin",
+    src = "opam/lib/ppx_module_timer/runtime/ppx_module_timer_runtime.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_optcomp",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_optcomp",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_optcomp",
+    native_lib = "opam/lib/ppx_optcomp/ppx_optcomp.cmxa",
+    bytecode_lib = "opam/lib/ppx_optcomp/ppx_optcomp.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":stdio",
+        ":base",
+        ":compiler-libs.common",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_optcomp-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_optcomp-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_optcomp",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_optcomp.ppx_optcomp-plugin",
+    src = "opam/lib/ppx_optcomp/ppx_optcomp.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_optional",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_optional",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_optional",
+    native_lib = "opam/lib/ppx_optional/ppx_optional.cmxa",
+    bytecode_lib = "opam/lib/ppx_optional/ppx_optional.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_optional-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_optional-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_optional",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_optional.ppx_optional-plugin",
+    src = "opam/lib/ppx_optional/ppx_optional.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_pipebang",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_pipebang",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_pipebang",
+    native_lib = "opam/lib/ppx_pipebang/ppx_pipebang.cmxa",
+    bytecode_lib = "opam/lib/ppx_pipebang/ppx_pipebang.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_pipebang-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_pipebang-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_pipebang",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_pipebang.ppx_pipebang-plugin",
+    src = "opam/lib/ppx_pipebang/ppx_pipebang.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_conv",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_conv",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_conv",
+    native_lib = "opam/lib/ppx_sexp_conv/ppx_sexp_conv.cmxa",
+    bytecode_lib = "opam/lib/ppx_sexp_conv/ppx_sexp_conv.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":ppxlib.ast",
+        ":ppx_sexp_conv.expander",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_conv-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_conv-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_conv",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_sexp_conv.ppx_sexp_conv-plugin",
+    src = "opam/lib/ppx_sexp_conv/ppx_sexp_conv.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_conv.expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_conv.expander",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_conv/expander",
+    native_lib = "opam/lib/ppx_sexp_conv/expander/ppx_sexp_conv_expander.cmxa",
+    bytecode_lib = "opam/lib/ppx_sexp_conv/expander/ppx_sexp_conv_expander.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib.metaquot_lifters",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_sexp_conv.expander.ppx_sexp_conv_expander-plugin",
+    src = "opam/lib/ppx_sexp_conv/expander/ppx_sexp_conv_expander.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_conv.runtime-lib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_conv.runtime-lib",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_conv/runtime-lib",
+    native_lib = "opam/lib/ppx_sexp_conv/runtime-lib/ppx_sexp_conv_lib.cmxa",
+    bytecode_lib = "opam/lib/ppx_sexp_conv/runtime-lib/ppx_sexp_conv_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_sexp_conv.runtime-lib.ppx_sexp_conv_lib-plugin",
+    src = "opam/lib/ppx_sexp_conv/runtime-lib/ppx_sexp_conv_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_message",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_message",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_message",
+    native_lib = "opam/lib/ppx_sexp_message/ppx_sexp_message.cmxa",
+    bytecode_lib = "opam/lib/ppx_sexp_message/ppx_sexp_message.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+        ":ppx_sexp_message.expander",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_message-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_message-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_message",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_sexp_message.ppx_sexp_message-plugin",
+    src = "opam/lib/ppx_sexp_message/ppx_sexp_message.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_message.expander",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_message.expander",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_message/expander",
+    native_lib = "opam/lib/ppx_sexp_message/expander/ppx_sexp_message_expander.cmxa",
+    bytecode_lib = "opam/lib/ppx_sexp_message/expander/ppx_sexp_message_expander.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":base",
+        ":ppx_here.expander",
+        ":ppx_sexp_conv.expander",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_sexp_message.expander.ppx_sexp_message_expander-plugin",
+    src = "opam/lib/ppx_sexp_message/expander/ppx_sexp_message_expander.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_value",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_value",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_value",
+    native_lib = "opam/lib/ppx_sexp_value/ppx_sexp_value.cmxa",
+    bytecode_lib = "opam/lib/ppx_sexp_value/ppx_sexp_value.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":base",
+        ":ppx_here.expander",
+        ":ppx_sexp_conv.expander",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_sexp_value-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_sexp_value-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_sexp_value",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_here.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":sexplib0",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_sexp_value.ppx_sexp_value-plugin",
+    src = "opam/lib/ppx_sexp_value/ppx_sexp_value.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_show",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_show",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_show",
+    native_lib = "opam/lib/ppx_show/ppx_show.cmxa",
+    bytecode_lib = "opam/lib/ppx_show/ppx_show.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":stdcompat",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_show-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_show-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_show",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_show.ppx_show-plugin",
+    src = "opam/lib/ppx_show/ppx_show.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_show.runtime",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_show.runtime",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_show/runtime",
+    native_lib = "opam/lib/ppx_show/runtime/ppx_show_runtime.cmxa",
+    bytecode_lib = "opam/lib/ppx_show/runtime/ppx_show_runtime.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_show.runtime.ppx_show_runtime-plugin",
+    src = "opam/lib/ppx_show/runtime/ppx_show_runtime.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_stable",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_stable",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_stable",
+    native_lib = "opam/lib/ppx_stable/ppx_stable.cmxa",
+    bytecode_lib = "opam/lib/ppx_stable/ppx_stable.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":compiler-libs.common",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_stable-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_stable-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_stable",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_stable.ppx_stable-plugin",
+    src = "opam/lib/ppx_stable/ppx_stable.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_stable_witness",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_stable_witness",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_stable_witness",
+    native_lib = "opam/lib/ppx_stable_witness/ppx_stable_witness.cmxa",
+    bytecode_lib = "opam/lib/ppx_stable_witness/ppx_stable_witness.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_stable_witness-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_stable_witness-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_stable_witness",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_stable_witness.runtime",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_stable_witness.ppx_stable_witness-plugin",
+    src = "opam/lib/ppx_stable_witness/ppx_stable_witness.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_stable_witness.runtime",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_stable_witness.runtime",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_stable_witness/runtime",
+    native_lib = "opam/lib/ppx_stable_witness/runtime/ppx_stable_witness_runtime.cmxa",
+    bytecode_lib = "opam/lib/ppx_stable_witness/runtime/ppx_stable_witness_runtime.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_stable_witness.stable_witness",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_stable_witness.runtime.ppx_stable_witness_runtime-plugin",
+    src = "opam/lib/ppx_stable_witness/runtime/ppx_stable_witness_runtime.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_stable_witness.stable_witness",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_stable_witness.stable_witness",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_stable_witness/stable_witness",
+    native_lib = "opam/lib/ppx_stable_witness/stable_witness/stable_witness.cmxa",
+    bytecode_lib = "opam/lib/ppx_stable_witness/stable_witness/stable_witness.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_stable_witness.stable_witness.stable_witness-plugin",
+    src = "opam/lib/ppx_stable_witness/stable_witness/stable_witness.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_string",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_string",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_string",
+    native_lib = "opam/lib/ppx_string/ppx_string.cmxa",
+    bytecode_lib = "opam/lib/ppx_string/ppx_string.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppxlib",
+        ":base",
+        ":compiler-libs.common",
+        ":ppx_hash.runtime-lib",
+        ":sexplib0",
+        ":ppx_compare.runtime-lib",
+        ":ppxlib.ast",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_string-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_string-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_string",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_string.ppx_string-plugin",
+    src = "opam/lib/ppx_string/ppx_string.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_tydi",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_tydi",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_tydi",
+    native_lib = "opam/lib/ppx_tydi/ppx_tydi.cmxa",
+    bytecode_lib = "opam/lib/ppx_tydi/ppx_tydi.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_tydi-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_tydi-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_tydi",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_tydi.ppx_tydi-plugin",
+    src = "opam/lib/ppx_tydi/ppx_tydi.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_typerep_conv",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_typerep_conv",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_typerep_conv",
+    native_lib = "opam/lib/ppx_typerep_conv/ppx_typerep_conv.cmxa",
+    bytecode_lib = "opam/lib/ppx_typerep_conv/ppx_typerep_conv.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_typerep_conv-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_typerep_conv-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_typerep_conv",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":typerep",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_typerep_conv.ppx_typerep_conv-plugin",
+    src = "opam/lib/ppx_typerep_conv/ppx_typerep_conv.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_variants_conv",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_variants_conv",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_variants_conv",
+    native_lib = "opam/lib/ppx_variants_conv/ppx_variants_conv.cmxa",
+    bytecode_lib = "opam/lib/ppx_variants_conv/ppx_variants_conv.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppxlib",
+        ":ppxlib.ast",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "ppx_variants_conv-runtime-deps",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "ppx_variants_conv-runtime-deps",
+    lib_dir = "",
+    include_dir = "opam/lib/ppx_variants_conv",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":variantslib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "ppx_variants_conv.ppx_variants_conv-plugin",
+    src = "opam/lib/ppx_variants_conv/ppx_variants_conv.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "ppxlib",
     visibility = [
         "PUBLIC",
@@ -937,15 +5042,15 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
+        ":ppx_derivers",
+        ":ppxlib.astlib",
+        ":ppxlib.stdppx",
+        ":sexplib0",
         ":stdlib-shims",
         ":ppxlib.ast",
-        ":ppxlib.astlib",
-        ":ppx_derivers",
-        ":sexplib0",
-        ":ppxlib.stdppx",
+        ":ppxlib.traverse_builtins",
         ":ocaml-compiler-libs.shadow",
         ":ppxlib.print_diff",
-        ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -1002,8 +5107,8 @@ prebuilt_ocaml_library(
     ],
     bytecode_only = True,
     deps = [
-        ":ocaml-compiler-libs.common",
         ":compiler-libs.common",
+        ":ocaml-compiler-libs.common",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -1032,10 +5137,10 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
         ":ppxlib",
-        ":ppxlib.ast",
         ":ppxlib.astlib",
-        ":ppxlib.traverse_builtins",
         ":ppxlib.metaquot_lifters",
+        ":ppxlib.ast",
+        ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
 
@@ -1084,9 +5189,9 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
         ":ppxlib",
+        ":ppxlib.stdppx",
         ":stdlib-shims",
         ":ppxlib.ast",
-        ":ppxlib.stdppx",
         ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
@@ -1230,9 +5335,9 @@ prebuilt_ocaml_library(
     bytecode_only = True,
     deps = [
         ":ppxlib",
+        ":ppxlib.stdppx",
         ":stdlib-shims",
         ":ppxlib.ast",
-        ":ppxlib.stdppx",
         ":ppxlib.traverse_builtins",
     ],
 ) if not host_info().os.is_windows else None
@@ -1291,6 +5396,202 @@ export_file(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "re",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "re",
+    lib_dir = "",
+    include_dir = "opam/lib/re",
+    native_lib = "opam/lib/re/re.cmxa",
+    bytecode_lib = "opam/lib/re/re.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":seq",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "re.re-plugin",
+    src = "opam/lib/re/re.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "re.emacs",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "re.emacs",
+    lib_dir = "",
+    include_dir = "opam/lib/re/emacs",
+    native_lib = "opam/lib/re/emacs/re_emacs.cmxa",
+    bytecode_lib = "opam/lib/re/emacs/re_emacs.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":re",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "re.emacs.re_emacs-plugin",
+    src = "opam/lib/re/emacs/re_emacs.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "re.glob",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "re.glob",
+    lib_dir = "",
+    include_dir = "opam/lib/re/glob",
+    native_lib = "opam/lib/re/glob/re_glob.cmxa",
+    bytecode_lib = "opam/lib/re/glob/re_glob.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":re",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "re.glob.re_glob-plugin",
+    src = "opam/lib/re/glob/re_glob.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "re.pcre",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "re.pcre",
+    lib_dir = "",
+    include_dir = "opam/lib/re/pcre",
+    native_lib = "opam/lib/re/pcre/re_pcre.cmxa",
+    bytecode_lib = "opam/lib/re/pcre/re_pcre.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":re",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "re.pcre.re_pcre-plugin",
+    src = "opam/lib/re/pcre/re_pcre.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "re.perl",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "re.perl",
+    lib_dir = "",
+    include_dir = "opam/lib/re/perl",
+    native_lib = "opam/lib/re/perl/re_perl.cmxa",
+    bytecode_lib = "opam/lib/re/perl/re_perl.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":re",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "re.perl.re_perl-plugin",
+    src = "opam/lib/re/perl/re_perl.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "re.posix",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "re.posix",
+    lib_dir = "",
+    include_dir = "opam/lib/re/posix",
+    native_lib = "opam/lib/re/posix/re_posix.cmxa",
+    bytecode_lib = "opam/lib/re/posix/re_posix.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":re",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "re.posix.re_posix-plugin",
+    src = "opam/lib/re/posix/re_posix.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "re.str",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "re.str",
+    lib_dir = "",
+    include_dir = "opam/lib/re/str",
+    native_lib = "opam/lib/re/str/re_str.cmxa",
+    bytecode_lib = "opam/lib/re/str/re_str.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":re",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "re.str.re_str-plugin",
+    src = "opam/lib/re/str/re_str.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "runtime_events",
     visibility = [
         "PUBLIC",
@@ -1337,6 +5638,93 @@ prebuilt_ocaml_library(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "sexplib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "sexplib",
+    lib_dir = "",
+    include_dir = "opam/lib/sexplib",
+    native_lib = "opam/lib/sexplib/sexplib.cmxa",
+    bytecode_lib = "opam/lib/sexplib/sexplib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":parsexp",
+        ":sexplib0",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "sexplib.sexplib-plugin",
+    src = "opam/lib/sexplib/sexplib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "sexplib.num",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "sexplib.num",
+    lib_dir = "",
+    include_dir = "opam/lib/sexplib/num",
+    native_lib = "opam/lib/sexplib/num/sexplib_num.cmxa",
+    bytecode_lib = "opam/lib/sexplib/num/sexplib_num.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":num",
+        ":sexplib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "sexplib.num.sexplib_num-plugin",
+    src = "opam/lib/sexplib/num/sexplib_num.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "sexplib.unix",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "sexplib.unix",
+    lib_dir = "",
+    include_dir = "opam/lib/sexplib/unix",
+    native_lib = "opam/lib/sexplib/unix/sexplib_unix.cmxa",
+    bytecode_lib = "opam/lib/sexplib/unix/sexplib_unix.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":unix",
+        ":sexplib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "sexplib.unix.sexplib_unix-plugin",
+    src = "opam/lib/sexplib/unix/sexplib_unix.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "sexplib0",
     visibility = [
         "PUBLIC",
@@ -1360,6 +5748,99 @@ prebuilt_ocaml_library(
 export_file(
     name = "sexplib0.sexplib0-plugin",
     src = "opam/lib/sexplib0/sexplib0.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "splittable_random",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "splittable_random",
+    lib_dir = "",
+    include_dir = "opam/lib/splittable_random",
+    native_lib = "opam/lib/splittable_random/splittable_random.cmxa",
+    bytecode_lib = "opam/lib/splittable_random/splittable_random.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":ppx_bench.runtime-lib",
+        ":base",
+        ":ppx_inline_test.config",
+        ":sexplib0",
+        ":ppx_inline_test.runtime-lib",
+        ":ppx_compare.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+        ":ppx_here.runtime-lib",
+        ":ppx_assert.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "splittable_random.splittable_random-plugin",
+    src = "opam/lib/splittable_random/splittable_random.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "stdcompat",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "stdcompat",
+    lib_dir = "",
+    include_dir = "opam/lib/stdcompat",
+    native_lib = "opam/lib/stdcompat/stdcompat.cmxa",
+    bytecode_lib = "opam/lib/stdcompat/stdcompat.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/stdcompat/libstdcompat_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/stdcompat/libstdcompat_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "stdcompat.stdcompat-plugin",
+    src = "opam/lib/stdcompat/stdcompat.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "stdio",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "stdio",
+    lib_dir = "",
+    include_dir = "opam/lib/stdio",
+    native_lib = "opam/lib/stdio/stdio.cmxa",
+    bytecode_lib = "opam/lib/stdio/stdio.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "stdio.stdio-plugin",
+    src = "opam/lib/stdio/stdio.cmxs",
 ) if not host_info().os.is_windows else None
 
 # buildifier: disable=no-effect
@@ -1480,6 +5961,76 @@ prebuilt_ocaml_library(
 
 # buildifier: disable=no-effect
 prebuilt_ocaml_library(
+    name = "time_now",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "time_now",
+    lib_dir = "",
+    include_dir = "opam/lib/time_now",
+    native_lib = "opam/lib/time_now/time_now.cmxa",
+    bytecode_lib = "opam/lib/time_now/time_now.cma",
+    c_libs = None,
+    native_c_libs = [
+        "opam/lib/time_now/libtime_now_stubs.a",
+    ],
+    bytecode_c_libs = [
+        "opam/lib/time_now/libtime_now_stubs.a",
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+        ":ppx_hash.runtime-lib",
+        ":sexplib0",
+        ":jane-street-headers",
+        ":ppx_compare.runtime-lib",
+        ":ppx_enumerate.runtime-lib",
+        ":ppx_sexp_conv.runtime-lib",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "time_now.time_now-plugin",
+    src = "opam/lib/time_now/time_now.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "time_now.runtime.js",
+    src = "opam/lib/time_now/runtime.js",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "typerep",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "typerep",
+    lib_dir = "",
+    include_dir = "opam/lib/typerep",
+    native_lib = "opam/lib/typerep/typerep_lib.cmxa",
+    bytecode_lib = "opam/lib/typerep/typerep_lib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "typerep.typerep_lib-plugin",
+    src = "opam/lib/typerep/typerep_lib.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
     name = "unix",
     visibility = [
         "PUBLIC",
@@ -1496,6 +6047,7 @@ prebuilt_ocaml_library(
     bytecode_c_libs = [
         "opam/lib/ocaml/libunixbat.a"
     ],
+    bytecode_only = True,
     deps = [
     ],
 ) if not host_info().os.is_windows else None
@@ -1504,4 +6056,32 @@ prebuilt_ocaml_library(
 export_file(
     name = "unix.unix-plugin",
     src = "opam/lib/ocaml/unix/unix.cmxs",
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+prebuilt_ocaml_library(
+    name = "variantslib",
+    visibility = [
+        "PUBLIC",
+    ],
+    lib_name = "variantslib",
+    lib_dir = "",
+    include_dir = "opam/lib/variantslib",
+    native_lib = "opam/lib/variantslib/variantslib.cmxa",
+    bytecode_lib = "opam/lib/variantslib/variantslib.cma",
+    c_libs = None,
+    native_c_libs = [
+    ],
+    bytecode_c_libs = [
+    ],
+    bytecode_only = True,
+    deps = [
+        ":base",
+    ],
+) if not host_info().os.is_windows else None
+
+# buildifier: disable=no-effect
+export_file(
+    name = "variantslib.variantslib-plugin",
+    src = "opam/lib/variantslib/variantslib.cmxs",
 ) if not host_info().os.is_windows else None
