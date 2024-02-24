@@ -13,6 +13,8 @@ jobs:
         os: [ubuntu, macos]
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: 'true'
       - uses: facebook/install-dotslash@latest
       - run: sudo apt-get update && sudo apt-get install opam
         if: matrix.os == 'ubuntu'
