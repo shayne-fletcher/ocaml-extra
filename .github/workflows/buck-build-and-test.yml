@@ -26,7 +26,6 @@ jobs:
           opam env | sed -e "s/ export .*//g" -e "s/'//g" -e "s/\;//g" >> $GITHUB_ENV
       - run: ./ocaml-setup.sh
       - run: ./buck2 build extra//... -v 2
-      - run: ./buck2 build extra//extra-lib:extra-doc --show-output -v 2
       - run: ./buck2 run extra//extra-test:extra-test -v 2 -- -ci true
       - run: ./buck2 run extra//sort-test:sort-test -v 2 -- -ci true
-      - run: ./buck2 run extra//core-test:hello-core
+      - run: ./buck2 run extra//core-test:hello-core -v 2
