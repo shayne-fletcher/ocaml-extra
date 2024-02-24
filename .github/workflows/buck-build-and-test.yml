@@ -18,7 +18,7 @@ jobs:
       - uses: facebook/install-dotslash@latest
       - run: sudo apt-get update && sudo apt-get install opam libzstd-dev
         if: matrix.os == 'ubuntu'
-      - run: brew install opam zstd
+      - run: brew install opam zstd coreutils
         if: matrix.os == 'macos'
       - run: |
           opam init --color=always --compiler=5.1.1 --disable-sandboxing -y
