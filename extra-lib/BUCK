@@ -5,3 +5,10 @@ ocaml_library(
   srcs = glob(["*.ml*"]),
   visibility = ["PUBLIC"],
 ) if _SUPPORTED else None
+
+genrule(
+  name = "extra-doc",
+  out = "html",
+  bash = 'mkdir ${OUT} && x=$(location :extra) && y=${x%/libextra.cmxa} && $(exe extra//third-party/ocaml:ocamldoc-exe) -d ${OUT} -html -I ${y}/_nativeobj_ ${SRCS}',
+  srcs = glob(["*.ml*"]),
+) if _SUPPORTED else None
