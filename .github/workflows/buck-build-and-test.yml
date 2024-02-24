@@ -13,9 +13,7 @@ jobs:
         os: [ubuntu, macos]
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/install-buck2@latest
-        with:
-          prelude-submodule: prelude
+      - uses: facebook/install-dotslash@latest
       - run: sudo apt-get update && sudo apt-get install opam
         if: matrix.os == 'ubuntu'
       - run: brew install opam
@@ -25,6 +23,6 @@ jobs:
           opam install --color=always menhir ppxlib ounit -y
           opam env | sed -e "s/ export .*//g" -e "s/'//g" -e "s/\;//g" >> $GITHUB_ENV
       - run: ./ocaml-setup.sh
-      - run: buck2 build extra//... -v 2
-      - run: buck2 run extra//extra-test:extra-test -v 2 -- -ci true
-      - run: buck2 run extra//sort-test:sort-test -v 2 -- -ci true
+      - run: ./buck2 build extra//... -v 2
+      - run: ./buck2 run extra//extra-test:extra-test -v 2 -- -ci true
+      - run: ./buck2 run extra//sort-test:sort-test -v 2 -- -ci true
