@@ -5,3 +5,10 @@ ocaml_library(
   srcs = glob(["*.ml*"]),
   visibility = ["PUBLIC"],
 ) if _SUPPORTED else None
+
+genrule(
+  name = "sort-doc",
+  out = "html",
+  bash = 'mkdir ${OUT} && x=$(location :sort) && y=${x%/libsort.cmxa} && $(exe_target extra//third-party/ocaml:ocamldoc-exe) -d ${OUT} -html -I ${y}/_nativeobj_ ${SRCS}',
+  srcs = glob(["*.ml*"]),
+) if _SUPPORTED else None
