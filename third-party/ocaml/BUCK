@@ -6045,7 +6045,7 @@ prebuilt_ocaml_library(
         "opam/lib/ocaml/libunixnat.a"
     ],
     bytecode_c_libs = [
-        "opam/lib/ocaml/libunixbat.a"
+        "opam/lib/ocaml/libunixbyt.a"
     ],
     bytecode_only = True,
     deps = [
