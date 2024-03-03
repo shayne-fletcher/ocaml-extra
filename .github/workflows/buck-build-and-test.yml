@@ -1,4 +1,4 @@
-name: Buck build and test
+name: buck2 build/run
 on:
   push:
   pull_request:
@@ -22,10 +22,12 @@ jobs:
         if: matrix.os == 'macos'
       - run: |
           opam init --color=always --compiler=5.1.1 --disable-sandboxing -y
-          opam install --color=always menhir ppxlib ounit core -y
+          opam option depext-run-installs=false
+          opam install --color=always ocamlfind menhir merlin ocamlformat ppxlib ounit core -y
           opam env | sed -e "s/ export .*//g" -e "s/'//g" -e "s/\;//g" >> $GITHUB_ENV
       - run: ./ocaml-setup.sh
-      - run: ./buck2 build extra//... -v 2
-      - run: ./buck2 run extra//extra-test:extra-test -v 2 -- -ci true
-      - run: ./buck2 run extra//sort-test:sort-test -v 2 -- -ci true
-      - run: ./buck2 run extra//core-test:hello-core -v 2
+      - run: echo "PATH=$(pwd):$PATH" >> $GITHUB_ENV
+      - run: buck2 build extra//... -v 2
+      - run: buck2 run extra//extra-test:extra-test -v 2 -- -ci true
+      - run: buck2 run extra//sort-test:sort-test -v 2 -- -ci true
+      - run: buck2 run extra//core-test:hello-core -v 2
